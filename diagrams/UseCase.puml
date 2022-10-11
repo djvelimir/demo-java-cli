@@ -1,0 +1,9 @@
+@startuml
+actor "User" as user
+
+rectangle demo-java-cli {
+  usecase "Generate Password" as generatePassword
+}
+
+user -> generatePassword
+@enduml
