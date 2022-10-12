@@ -2,10 +2,29 @@
 'https://plantuml.com/class-diagram
 
 class App {
-    - PasswordGenerator passwordGenerator
+    - ArgumentProcessor argumentProcessor
+    - Display display
     + {static} void main(String[] args)
     - <<constructor>> App(PasswordGenerator passwordGenerator)
     - void start(String[] args)
+}
+
+interface ArgumentProcessor {
+    boolean validateArguments(String[] args);
+    void processArguments(String[] args);
+}
+
+class ArgumentProcessorImpl {
+    - PasswordGenerator passwordGenerator
+    - Display display
+}
+
+interface Display {
+    void showUsage();
+    void showGeneratedPassword(String generatedPassword);
+}
+
+class DisplayImpl {
 }
 
 interface PasswordGenerator {
@@ -14,7 +33,11 @@ interface PasswordGenerator {
 
 class PasswordGeneratorImpl {
 }
-
+ArgumentProcessor <|-- ArgumentProcessorImpl
+Display <|-- DisplayImpl
 PasswordGenerator <|-- PasswordGeneratorImpl
+
+App *--l ArgumentProcessor
+App *--d Display
 App *--r PasswordGenerator
 @enduml

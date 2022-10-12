@@ -1,55 +1,30 @@
 package org.example;
 
-import org.example.service.PasswordGenerator;
-import org.example.service.PasswordGeneratorImpl;
+import org.example.service.*;
 
 /**
  * Main application class
  */
 public class App {
-    private PasswordGenerator passwordGenerator;
+    private ArgumentProcessor argumentProcessor;
+    private Display display;
 
     public static void main(String[] args) {
-        var app = new App(new PasswordGeneratorImpl());
+        var app = new App(new ArgumentProcessorImpl(new PasswordGeneratorImpl(), new DisplayImpl()), new DisplayImpl());
         app.start(args);
     }
 
-    private App(PasswordGenerator passwordGenerator) {
-        this.passwordGenerator = passwordGenerator;
+    private App(ArgumentProcessor argumentProcessor, Display display) {
+        this.argumentProcessor = argumentProcessor;
+        this.display = display;
     }
 
     private void start(String[] args) {
-        if (!isValid(args)) {
-            showUsage();
+        if (!argumentProcessor.validate(args)) {
+            display.showUsage();
             return;
         }
 
-        process(args);
-    }
-
-    private boolean isValid(String[] args) {
-        return args.length != 0 && args.length == 2 && args[0].equals("generate") && args[1].equals("password");
-    }
-
-    private void process(String[] args) {
-        switch (args[0]) {
-            case "generate":
-                switch (args[1]) {
-                    case "password":
-                        var generatedPassword = passwordGenerator.generatePassword();
-                        showGeneratedPassword(generatedPassword);
-                        break;
-                }
-                break;
-        }
-    }
-
-    private void showUsage() {
-        System.out.println("Usage:");
-        System.out.println("java -jar ./demo-java-cli.jar generate password");
-    }
-
-    private void showGeneratedPassword(String generatedPassword) {
-        System.out.println("Generated password is: " + generatedPassword);
+        argumentProcessor.process(args);
     }
 }

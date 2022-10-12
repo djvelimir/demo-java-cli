@@ -1,14 +1,36 @@
 @startuml
-actor User as user
 participant App as app
-participant PasswordGenerator as pg
+participant ArgumentProcessor as argumentProcessor
+participant PasswordGenerator as passwordGenerator
+participant Display as display
 
-user -> app: java -jar ./demo-java-cli.jar generate password
 activate app
-app -> pg: generatePassword
-activate pg
-app <-- pg: return generated password
-deactivate pg
-user <-- app: show generated password
+
+
+app -> argumentProcessor: validate
+activate argumentProcessor
+app <-- argumentProcessor: true/false
+deactivate argumentProcessor
+
+alt#Gold #LightBlue Arguments are valid
+    app -> argumentProcessor: process
+    activate argumentProcessor
+    argumentProcessor -> passwordGenerator: generatePassword
+    activate passwordGenerator
+    argumentProcessor <-- passwordGenerator: return generated password
+    deactivate passwordGenerator
+    argumentProcessor -> display: showGeneratedPassword
+    activate display
+    argumentProcessor <-- display
+    deactivate display
+    app <-- argumentProcessor
+    deactivate argumentProcessor
+else #Pink Arguments are not valid
+    app -> display: showUsage
+    activate display
+    app <-- display
+    deactivate display
+end
+
 deactivate app
 @enduml
