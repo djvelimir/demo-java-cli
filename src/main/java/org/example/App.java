@@ -7,14 +7,14 @@ import org.example.generator.PasswordGeneratorImpl;
  * Main application class
  */
 public class App {
-    PasswordGenerator passwordGenerator;
+    private PasswordGenerator passwordGenerator;
 
     public static void main(String[] args) {
         var app = new App(new PasswordGeneratorImpl());
         app.start(args);
     }
 
-    public App(PasswordGenerator passwordGenerator) {
+    private App(PasswordGenerator passwordGenerator) {
         this.passwordGenerator = passwordGenerator;
     }
 
