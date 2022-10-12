@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.generator.PasswordGenerator;
-import org.example.generator.PasswordGeneratorImpl;
+import org.example.service.PasswordGenerator;
+import org.example.service.PasswordGeneratorImpl;
 
 /**
  * Main application class

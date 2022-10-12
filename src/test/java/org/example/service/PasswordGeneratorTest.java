@@ -1,4 +1,4 @@
-package org.example.generator;
+package org.example.service;
 
 import org.junit.After;
 import org.junit.Before;
