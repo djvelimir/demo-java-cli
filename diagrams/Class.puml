@@ -9,8 +9,8 @@ class App {
 }
 
 interface ArgumentProcessor {
-    boolean validateArguments(String[] args);
-    void processArguments(String[] args);
+    + boolean validateArguments(String[] args)
+    + void processArguments(String[] args)
 }
 
 class ArgumentProcessorImpl {
@@ -19,8 +19,8 @@ class ArgumentProcessorImpl {
 }
 
 interface Display {
-    void showUsage();
-    void showGeneratedPassword(String generatedPassword);
+    + void showUsage()
+    + void showGeneratedPassword(String generatedPassword)
 }
 
 class DisplayImpl {
