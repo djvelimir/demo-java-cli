@@ -5,7 +5,6 @@ class App {
     - ArgumentProcessor argumentProcessor
     - Display display
     + {static} void main(String[] args)
-    - <<constructor>> App(PasswordGenerator passwordGenerator)
     - void start(String[] args)
 }
 
