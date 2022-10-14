@@ -38,5 +38,6 @@ PasswordGenerator <|-- PasswordGeneratorImpl
 
 App *--l ArgumentProcessor
 App *--d Display
-App *--r PasswordGenerator
+ArgumentProcessorImpl *--r Display
+ArgumentProcessorImpl *--l PasswordGenerator
 @enduml
