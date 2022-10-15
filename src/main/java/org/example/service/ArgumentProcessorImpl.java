@@ -1,10 +1,13 @@
 package org.example.service;
 
+import javax.inject.Inject;
+
 public class ArgumentProcessorImpl implements ArgumentProcessor {
     private ArgumentValidator argumentValidator;
     private PasswordGenerator passwordGenerator;
     private Terminal terminal;
 
+    @Inject
     public ArgumentProcessorImpl(ArgumentValidator argumentValidator, PasswordGenerator passwordGenerator, Terminal terminal) {
         this.argumentValidator = argumentValidator;
         this.passwordGenerator = passwordGenerator;

@@ -1,10 +1,13 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class App {
+interface App {
+    + start(args: String[])
+}
+
+class AppImpl {
     - argumentProcessor: ArgumentProcessor
     + {static} main(args: String[])
-    - start(args: String[])
 }
 
 interface ArgumentValidator {
@@ -42,8 +45,9 @@ ArgumentValidator <|-- ArgumentValidatorImpl
 ArgumentProcessor <|-- ArgumentProcessorImpl
 Terminal <|-- TerminalImpl
 PasswordGenerator <|-- PasswordGeneratorImpl
+App <|-- AppImpl
 
-App *--l ArgumentProcessor
+AppImpl *--l ArgumentProcessor
 
 ArgumentProcessorImpl *--l ArgumentValidator
 ArgumentProcessorImpl *--d PasswordGenerator

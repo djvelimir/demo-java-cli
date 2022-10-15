@@ -1,5 +1,5 @@
 @startuml
-participant App as app
+participant AppImpl as app
 participant ArgumentProcessor as argumentProcessor
 participant ArgumentValidator as argumentValidator
 participant PasswordGenerator as passwordGenerator

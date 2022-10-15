@@ -24,6 +24,11 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>5.1.0</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -53,7 +58,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>org.example.App</mainClass>
+                <mainClass>org.example.AppImpl</mainClass>
               </manifest>
             </archive>
           </configuration>
