@@ -10,11 +10,13 @@ activate app
 app -> argumentProcessor: process(args)
 activate argumentProcessor
 
-argumentProcessor -> argumentValidator: validate
-argumentProcessor <-- argumentValidator: true/false
+argumentProcessor -> argumentValidator: validate(args)
+activate argumentValidator
+argumentProcessor <-- argumentValidator: return are arguments valid
+deactivate argumentValidator
 
 alt#Gold #LightBlue Arguments are valid
-    argumentProcessor -> passwordGenerator: generate
+    argumentProcessor -> passwordGenerator: generate()
     activate passwordGenerator
     argumentProcessor <-- passwordGenerator: return password
     deactivate passwordGenerator
