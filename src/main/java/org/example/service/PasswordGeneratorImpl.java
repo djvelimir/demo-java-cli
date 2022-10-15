@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Concrete implementation of service for password generation
- */
 public class PasswordGeneratorImpl implements PasswordGenerator {
     private static final int PASSWORD_LENGTH = 16;
     private static final String UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -31,7 +28,7 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
      * @return generated password
      */
     @Override
-    public String generatePassword() {
+    public String generate() {
         var stringBuilder = new StringBuilder();
 
         // generate at least one uppercase character

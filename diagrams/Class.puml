@@ -2,42 +2,50 @@
 'https://plantuml.com/class-diagram
 
 class App {
-    - ArgumentProcessor argumentProcessor
-    - Display display
-    + {static} void main(String[] args)
-    - void start(String[] args)
+    - argumentProcessor: ArgumentProcessor
+    + {static} main(args: String[])
+    - start(args: String[])
+}
+
+interface ArgumentValidator {
+    + validate(args: String[]): boolean
+}
+
+class ArgumentValidatorImpl {
 }
 
 interface ArgumentProcessor {
-    + boolean validateArguments(String[] args)
-    + void processArguments(String[] args)
+    + process(args: String[])
 }
 
 class ArgumentProcessorImpl {
-    - PasswordGenerator passwordGenerator
-    - Display display
+    - argumentValidator: ArgumentValidator
+    - passwordGenerator: PasswordGenerator
+    - terminal: Terminal
 }
 
-interface Display {
-    + void showUsage()
-    + void showGeneratedPassword(String generatedPassword)
+interface Terminal {
+    + show(message: String)
 }
 
-class DisplayImpl {
+class TerminalImpl {
 }
 
 interface PasswordGenerator {
-    +String generatePassword()
+    + generate(): String
 }
 
 class PasswordGeneratorImpl {
 }
+
+ArgumentValidator <|-- ArgumentValidatorImpl
 ArgumentProcessor <|-- ArgumentProcessorImpl
-Display <|-- DisplayImpl
+Terminal <|-- TerminalImpl
 PasswordGenerator <|-- PasswordGeneratorImpl
 
 App *--l ArgumentProcessor
-App *--d Display
-ArgumentProcessorImpl *--r Display
-ArgumentProcessorImpl *--l PasswordGenerator
+
+ArgumentProcessorImpl *--l ArgumentValidator
+ArgumentProcessorImpl *--d PasswordGenerator
+ArgumentProcessorImpl *--r Terminal
 @enduml

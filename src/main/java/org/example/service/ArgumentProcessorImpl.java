@@ -1,27 +1,33 @@
 package org.example.service;
 
 public class ArgumentProcessorImpl implements ArgumentProcessor {
+    private ArgumentValidator argumentValidator;
     private PasswordGenerator passwordGenerator;
-    private Display display;
+    private Terminal terminal;
 
-    public ArgumentProcessorImpl(PasswordGenerator passwordGenerator, Display display) {
+    public ArgumentProcessorImpl(ArgumentValidator argumentValidator, PasswordGenerator passwordGenerator, Terminal terminal) {
+        this.argumentValidator = argumentValidator;
         this.passwordGenerator = passwordGenerator;
-        this.display = display;
+        this.terminal = terminal;
     }
 
-    public boolean validate(String[] args) {
-        return args.length != 0 && args.length == 2 && args[0].equals("generate") && args[1].equals("password");
-    }
-
+    @Override
     public void process(String[] args) {
+        if (!argumentValidator.validate(args)) {
+            String usage = "Usage:" + System.lineSeparator() +
+                    "java -jar ./demo-java-cli.jar generate password";
+            terminal.show(usage);
+            return;
+        }
+
         switch (args[0]) {
             default:
             case "generate":
                 switch (args[1]) {
                     default:
                     case "password":
-                        var generatedPassword = passwordGenerator.generatePassword();
-                        display.showGeneratedPassword(generatedPassword);
+                        String password = passwordGenerator.generate();
+                        terminal.show(password);
                         break;
                 }
                 break;

@@ -1,36 +1,37 @@
 @startuml
 participant App as app
 participant ArgumentProcessor as argumentProcessor
+participant ArgumentValidator as argumentValidator
 participant PasswordGenerator as passwordGenerator
-participant Display as display
+participant Terminal as terminal
 
 activate app
 
-
-app -> argumentProcessor: validate
+app -> argumentProcessor: process(args)
 activate argumentProcessor
-app <-- argumentProcessor: true/false
-deactivate argumentProcessor
+
+argumentProcessor -> argumentValidator: validate
+argumentProcessor <-- argumentValidator: true/false
 
 alt#Gold #LightBlue Arguments are valid
-    app -> argumentProcessor: process
-    activate argumentProcessor
-    argumentProcessor -> passwordGenerator: generatePassword
+    argumentProcessor -> passwordGenerator: generate
     activate passwordGenerator
-    argumentProcessor <-- passwordGenerator: return generated password
+    argumentProcessor <-- passwordGenerator: return password
     deactivate passwordGenerator
-    argumentProcessor -> display: showGeneratedPassword
-    activate display
-    argumentProcessor <-- display
-    deactivate display
-    app <-- argumentProcessor
-    deactivate argumentProcessor
+
+    argumentProcessor -> terminal: show(password)
+    activate terminal
+    argumentProcessor <-- terminal
+    deactivate terminal
+
 else #Pink Arguments are not valid
-    app -> display: showUsage
-    activate display
-    app <-- display
-    deactivate display
+    argumentProcessor -> terminal: show(usage)
+    activate terminal
+    argumentProcessor <-- terminal
+    deactivate terminal
 end
 
-deactivate app
+app <-- argumentProcessor
+deactivate argumentProcessor
+
 @enduml

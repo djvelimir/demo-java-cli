@@ -15,7 +15,7 @@ public class PasswordGeneratorTest {
 
     @Before
     public void before() {
-        generatedPassword = testSubject.generatePassword();
+        generatedPassword = testSubject.generate();
     }
 
     @After

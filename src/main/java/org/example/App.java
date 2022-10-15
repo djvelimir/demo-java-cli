@@ -7,24 +7,17 @@ import org.example.service.*;
  */
 public class App {
     private ArgumentProcessor argumentProcessor;
-    private Display display;
 
     public static void main(String[] args) {
-        var app = new App(new ArgumentProcessorImpl(new PasswordGeneratorImpl(), new DisplayImpl()), new DisplayImpl());
+        var app = new App(new ArgumentProcessorImpl(new ArgumentValidatorImpl(), new PasswordGeneratorImpl(), new TerminalImpl()));
         app.start(args);
     }
 
-    private App(ArgumentProcessor argumentProcessor, Display display) {
+    private App(ArgumentProcessor argumentProcessor) {
         this.argumentProcessor = argumentProcessor;
-        this.display = display;
     }
 
     private void start(String[] args) {
-        if (!argumentProcessor.validate(args)) {
-            display.showUsage();
-            return;
-        }
-
         argumentProcessor.process(args);
     }
 }
