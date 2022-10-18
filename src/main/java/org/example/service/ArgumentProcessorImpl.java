@@ -23,17 +23,7 @@ public class ArgumentProcessorImpl implements ArgumentProcessor {
             return;
         }
 
-        switch (args[0]) {
-            default:
-            case "generate":
-                switch (args[1]) {
-                    default:
-                    case "password":
-                        String password = passwordGenerator.generate();
-                        terminal.show(password);
-                        break;
-                }
-                break;
-        }
+        String password = passwordGenerator.generate();
+        terminal.show(password);
     }
 }
