@@ -1,9 +1,9 @@
 @startuml
 participant AppImpl as app
-participant ArgumentProcessor as argumentProcessor
-participant ArgumentValidator as argumentValidator
-participant PasswordGenerator as passwordGenerator
-participant Terminal as terminal
+participant ArgumentProcessorImpl as argumentProcessor
+participant ArgumentValidatorImpl as argumentValidator
+participant PasswordGeneratorImpl as passwordGenerator
+participant TerminalImpl as terminal
 
 activate app
 
