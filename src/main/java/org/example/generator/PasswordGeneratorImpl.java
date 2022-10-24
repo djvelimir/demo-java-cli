@@ -1,9 +1,10 @@
 package org.example.generator;
 
+import org.example.util.RandomCharacter;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class PasswordGeneratorImpl implements PasswordGenerator {
     private static final int PASSWORD_LENGTH = 16;
@@ -15,7 +16,6 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
             .concat(LOWERCASE_CHARACTERS)
             .concat(DIGIT_CHARACTERS)
             .concat(SPECIAL_CHARACTERS);
-    private static final Random RANDOM_OBJECT = new Random();
 
     /**
      * Generate random password
@@ -32,20 +32,20 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
         var stringBuilder = new StringBuilder();
 
         // generate at least one uppercase character
-        stringBuilder.append(generateRandomCharacter(UPPERCASE_CHARACTERS));
+        stringBuilder.append(RandomCharacter.get(UPPERCASE_CHARACTERS));
 
         // generate at least one lowercase character
-        stringBuilder.append(generateRandomCharacter(LOWERCASE_CHARACTERS));
+        stringBuilder.append(RandomCharacter.get(LOWERCASE_CHARACTERS));
 
         // generate at least one digit character
-        stringBuilder.append(generateRandomCharacter(DIGIT_CHARACTERS));
+        stringBuilder.append(RandomCharacter.get(DIGIT_CHARACTERS));
 
         // generate at least one special character
-        stringBuilder.append(generateRandomCharacter(SPECIAL_CHARACTERS));
+        stringBuilder.append(RandomCharacter.get(SPECIAL_CHARACTERS));
 
         for (int i = 4; i < PASSWORD_LENGTH; i++) {
             // generate random character from union of allowed characters
-            stringBuilder.append(generateRandomCharacter(UNION_OF_ALLOWED_CHARACTERS));
+            stringBuilder.append(RandomCharacter.get(UNION_OF_ALLOWED_CHARACTERS));
         }
 
         // shuffle generated characters
@@ -54,9 +54,5 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
 
         // return generated password
         return String.join("", ch);
-    }
-
-    private char generateRandomCharacter(String characters) {
-        return characters.charAt(RANDOM_OBJECT.nextInt(characters.length()));
     }
 }
