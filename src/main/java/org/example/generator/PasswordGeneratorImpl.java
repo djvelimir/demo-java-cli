@@ -1,10 +1,7 @@
 package org.example.generator;
 
 import org.example.util.RandomCharacter;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import org.example.util.StringShuffler;
 
 public class PasswordGeneratorImpl implements PasswordGenerator {
     private static final int PASSWORD_LENGTH = 16;
@@ -48,11 +45,7 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
             stringBuilder.append(RandomCharacter.get(UNION_OF_ALLOWED_CHARACTERS));
         }
 
-        // shuffle generated characters
-        List<String> ch = Arrays.asList(stringBuilder.toString().split(""));
-        Collections.shuffle(ch);
-
-        // return generated password
-        return String.join("", ch);
+        // return shuffled generated characters
+        return StringShuffler.shuffle(stringBuilder.toString());
     }
 }
