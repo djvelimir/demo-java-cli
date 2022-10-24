@@ -2,7 +2,7 @@ package org.example;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.example.service.ArgumentProcessor;
+import org.example.processor.ArgumentProcessor;
 
 import javax.inject.Inject;
 

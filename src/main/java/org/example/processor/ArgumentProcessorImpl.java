@@ -1,4 +1,8 @@
-package org.example.service;
+package org.example.processor;
+
+import org.example.validator.ArgumentValidator;
+import org.example.generator.PasswordGenerator;
+import org.example.display.Terminal;
 
 import javax.inject.Inject;
 

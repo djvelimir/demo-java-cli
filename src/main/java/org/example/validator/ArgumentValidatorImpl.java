@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.validator;
 
 public class ArgumentValidatorImpl implements ArgumentValidator {
     @Override

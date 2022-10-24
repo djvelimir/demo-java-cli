@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.display;
 
 public class TerminalImpl implements Terminal {
     @Override
