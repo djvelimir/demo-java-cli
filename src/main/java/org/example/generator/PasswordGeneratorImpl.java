@@ -1,18 +1,19 @@
 package org.example.generator;
 
-import org.example.util.RandomCharacter;
-import org.example.util.StringShuffler;
+import org.example.shuffler.StringShuffler;
+
+import javax.inject.Inject;
 
 public class PasswordGeneratorImpl implements PasswordGenerator {
-    private static final int PASSWORD_LENGTH = 16;
-    private static final String UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
-    private static final String DIGIT_CHARACTERS = "0123456789";
-    private static final String SPECIAL_CHARACTERS = "~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
-    private static final String UNION_OF_ALLOWED_CHARACTERS = UPPERCASE_CHARACTERS
-            .concat(LOWERCASE_CHARACTERS)
-            .concat(DIGIT_CHARACTERS)
-            .concat(SPECIAL_CHARACTERS);
+    private final int PASSWORD_LENGTH = 16;
+    private final RandomCharacterGenerator randomCharacterGenerator;
+    private final StringShuffler stringShuffler;
+
+    @Inject
+    public PasswordGeneratorImpl(RandomCharacterGenerator randomCharacterGenerator, StringShuffler stringShuffler) {
+        this.randomCharacterGenerator = randomCharacterGenerator;
+        this.stringShuffler = stringShuffler;
+    }
 
     /**
      * Generate random password
@@ -28,24 +29,15 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
     public String generate() {
         var stringBuilder = new StringBuilder();
 
-        // generate at least one uppercase character
-        stringBuilder.append(RandomCharacter.get(UPPERCASE_CHARACTERS));
+        stringBuilder.append(randomCharacterGenerator.generateUppercaseCharacter());
+        stringBuilder.append(randomCharacterGenerator.generateLowercaseCharacter());
+        stringBuilder.append(randomCharacterGenerator.generateDigitCharacter());
+        stringBuilder.append(randomCharacterGenerator.generateSpecialCharacter());
 
-        // generate at least one lowercase character
-        stringBuilder.append(RandomCharacter.get(LOWERCASE_CHARACTERS));
-
-        // generate at least one digit character
-        stringBuilder.append(RandomCharacter.get(DIGIT_CHARACTERS));
-
-        // generate at least one special character
-        stringBuilder.append(RandomCharacter.get(SPECIAL_CHARACTERS));
-
-        for (int i = 4; i < PASSWORD_LENGTH; i++) {
-            // generate random character from union of allowed characters
-            stringBuilder.append(RandomCharacter.get(UNION_OF_ALLOWED_CHARACTERS));
+        for (int i = 0; i < PASSWORD_LENGTH - 4; i++) {
+            stringBuilder.append(randomCharacterGenerator.generateAllowedCharacter());
         }
 
-        // return shuffled generated characters
-        return StringShuffler.shuffle(stringBuilder.toString());
+        return stringShuffler.shuffle(stringBuilder.toString());
     }
 }

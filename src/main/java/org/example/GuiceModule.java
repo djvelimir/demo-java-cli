@@ -1,8 +1,12 @@
 package org.example;
 
 import com.google.inject.AbstractModule;
+import org.example.generator.RandomCharacterGenerator;
+import org.example.generator.RandomCharacterGeneratorImpl;
 import org.example.processor.ArgumentProcessor;
 import org.example.processor.ArgumentProcessorImpl;
+import org.example.shuffler.StringShuffler;
+import org.example.shuffler.StringShufflerImpl;
 import org.example.validator.ArgumentValidator;
 import org.example.validator.ArgumentValidatorImpl;
 import org.example.generator.PasswordGenerator;
@@ -16,6 +20,8 @@ public class GuiceModule extends AbstractModule {
         bind(ArgumentProcessor.class).to(ArgumentProcessorImpl.class);
         bind(ArgumentValidator.class).to(ArgumentValidatorImpl.class);
         bind(PasswordGenerator.class).to(PasswordGeneratorImpl.class);
+        bind(RandomCharacterGenerator.class).to(RandomCharacterGeneratorImpl.class);
+        bind(StringShuffler.class).to(StringShufflerImpl.class);
         bind(Terminal.class).to(TerminalImpl.class);
         bind(App.class).to(AppImpl.class);
     }

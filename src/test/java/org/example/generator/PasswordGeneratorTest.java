@@ -1,72 +1,66 @@
 package org.example.generator;
 
+import org.example.shuffler.StringShuffler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.regex.Pattern;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PasswordGeneratorTest {
+    @Mock
+    private RandomCharacterGenerator randomCharacterGenerator;
+
+    @Mock
+    private StringShuffler stringShuffler;
+
     @InjectMocks
     private PasswordGeneratorImpl passwordGenerator;
 
     @Test
-    public void shouldHave16Characters() {
-        String generatedPassword = passwordGenerator.generate();
+    public void shouldCallGenerateUppercaseCharacter() {
+        passwordGenerator.generate();
 
-        assertEquals(16, generatedPassword.length());
+        verify(randomCharacterGenerator, times(1)).generateUppercaseCharacter();
     }
 
     @Test
-    public void shouldContainLowercaseCharacter() {
-        String generatedPassword = passwordGenerator.generate();
+    public void shouldCallGenerateLowercaseCharacter() {
+        passwordGenerator.generate();
 
-        Pattern inputRegex = Pattern.compile(".*[a-z].*");
-        boolean inputMatches = inputRegex.matcher(generatedPassword).matches();
-
-        if (!inputMatches) {
-            fail();
-        }
+        verify(randomCharacterGenerator, times(1)).generateLowercaseCharacter();
     }
 
     @Test
-    public void shouldContainUppercaseCharacter() {
-        String generatedPassword = passwordGenerator.generate();
+    public void shouldCallGenerateDigitCharacter() {
+        passwordGenerator.generate();
 
-        Pattern inputRegex = Pattern.compile(".*[A-Z].*");
-        boolean inputMatches = inputRegex.matcher(generatedPassword).matches();
-
-        if (!inputMatches) {
-            fail();
-        }
+        verify(randomCharacterGenerator, times(1)).generateDigitCharacter();
     }
 
     @Test
-    public void shouldContainDigitCharacter() {
-        String generatedPassword = passwordGenerator.generate();
+    public void shouldCallGenerateSpecialCharacter() {
+        passwordGenerator.generate();
 
-        Pattern inputRegex = Pattern.compile(".*\\d.*");
-        boolean inputMatches = inputRegex.matcher(generatedPassword).matches();
-
-        if (!inputMatches) {
-            fail();
-        }
+        verify(randomCharacterGenerator, times(1)).generateSpecialCharacter();
     }
 
     @Test
-    public void shouldContainSpecialCharacter() {
-        String generatedPassword = passwordGenerator.generate();
+    public void shouldCallGenerateAllowedCharacter12Times() {
+        passwordGenerator.generate();
 
-        Pattern inputRegex = Pattern.compile(".*[`~!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*");
-        boolean inputMatches = inputRegex.matcher(generatedPassword).matches();
+        verify(randomCharacterGenerator, times(12)).generateAllowedCharacter();
+    }
 
-        if (!inputMatches) {
-            fail();
-        }
+    @Test
+    public void shouldCallShuffle() {
+        passwordGenerator.generate();
+
+        verify(stringShuffler, times(1)).shuffle(any());
     }
 }

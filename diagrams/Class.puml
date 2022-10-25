@@ -39,12 +39,39 @@ interface PasswordGenerator {
 }
 
 class PasswordGeneratorImpl {
+    - PASSWORD_LENGTH: int
+}
+
+interface RandomCharacterGenerator {
+    + generateUppercaseCharacter(): char
+    + generateLowercaseCharacter(): char
+    + generateDigitCharacter(): char
+    + generateSpecialCharacter(): char
+    + generateAllowedCharacter(): char
+}
+
+class RandomCharacterGeneratorImpl {
+    - UPPERCASE_CHARACTERS: String
+    - LOWERCASE_CHARACTERS: String
+    - DIGIT_CHARACTERS: String
+    - SPECIAL_CHARACTERS: String
+    - UNION_OF_ALLOWED_CHARACTERS: String
+    - RANDOM_OBJECT: Random
+}
+
+interface StringShuffler {
+    + shuffle(characters: String): String
+}
+
+class StringShufflerImpl {
 }
 
 ArgumentValidator <|-- ArgumentValidatorImpl
 ArgumentProcessor <|-- ArgumentProcessorImpl
 Terminal <|-- TerminalImpl
 PasswordGenerator <|-- PasswordGeneratorImpl
+RandomCharacterGenerator <|-- RandomCharacterGeneratorImpl
+StringShuffler <|-- StringShufflerImpl
 App <|-- AppImpl
 
 AppImpl *--l ArgumentProcessor
@@ -52,4 +79,7 @@ AppImpl *--l ArgumentProcessor
 ArgumentProcessorImpl *--l ArgumentValidator
 ArgumentProcessorImpl *--d PasswordGenerator
 ArgumentProcessorImpl *--r Terminal
+
+PasswordGeneratorImpl *--l RandomCharacterGenerator
+PasswordGeneratorImpl *--r StringShuffler
 @enduml

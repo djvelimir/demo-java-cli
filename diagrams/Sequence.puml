@@ -3,6 +3,8 @@ participant AppImpl as app
 participant ArgumentProcessorImpl as argumentProcessor
 participant ArgumentValidatorImpl as argumentValidator
 participant PasswordGeneratorImpl as passwordGenerator
+participant RandomCharacterGeneratorImpl as randomCharacterGenerator
+participant StringShufflerImpl as stringShuffler
 participant TerminalImpl as terminal
 
 activate app
@@ -18,7 +20,51 @@ deactivate argumentValidator
 alt#Gold #LightBlue Arguments are valid
     argumentProcessor -> passwordGenerator: generate()
     activate passwordGenerator
-    argumentProcessor <-- passwordGenerator: return password
+
+    passwordGenerator -> randomCharacterGenerator: generateUppercaseCharacter()
+    activate randomCharacterGenerator
+
+    randomCharacterGenerator -> passwordGenerator: return uppercase character
+    deactivate randomCharacterGenerator
+    passwordGenerator -> passwordGenerator: append character
+
+    passwordGenerator -> randomCharacterGenerator: generateLowercaseCharacter()
+    activate randomCharacterGenerator
+
+    randomCharacterGenerator -> passwordGenerator: return lowercase character
+    deactivate randomCharacterGenerator
+    passwordGenerator -> passwordGenerator: append character
+
+    passwordGenerator -> randomCharacterGenerator: generateDigitCharacter()
+    activate randomCharacterGenerator
+
+    randomCharacterGenerator -> passwordGenerator: return digit character
+    deactivate randomCharacterGenerator
+    passwordGenerator -> passwordGenerator: append character
+
+    passwordGenerator -> randomCharacterGenerator: generateSpecialCharacter()
+    activate randomCharacterGenerator
+
+    randomCharacterGenerator -> passwordGenerator: return special character
+    deactivate randomCharacterGenerator
+    passwordGenerator -> passwordGenerator: append character
+
+    loop PASSWORD_LENGTH-4 times
+        passwordGenerator -> randomCharacterGenerator: generateAllowedCharacter()
+        activate randomCharacterGenerator
+
+        randomCharacterGenerator -> passwordGenerator: return character
+        deactivate randomCharacterGenerator
+        passwordGenerator -> passwordGenerator: append character
+    end
+
+    passwordGenerator -> stringShuffler: shuffle(characters)
+    activate stringShuffler
+
+    stringShuffler -> passwordGenerator: return shuffled characters
+    deactivate stringShuffler
+
+    argumentProcessor <-- passwordGenerator: return generated password
     deactivate passwordGenerator
 
     argumentProcessor -> terminal: show(password)
