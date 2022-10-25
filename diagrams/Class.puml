@@ -40,6 +40,8 @@ interface PasswordGenerator {
 
 class PasswordGeneratorImpl {
     - PASSWORD_LENGTH: int
+    - randomCharacterGenerator: RandomCharacterGenerator;
+    - stringShuffler: StringShuffler;
 }
 
 interface RandomCharacterGenerator {
