@@ -55,7 +55,7 @@ class RandomCharacterGeneratorImpl {
     - LOWERCASE_CHARACTERS: String
     - DIGIT_CHARACTERS: String
     - SPECIAL_CHARACTERS: String
-    - UNION_OF_ALLOWED_CHARACTERS: String
+    - ALLOWED_CHARACTERS: String
     - RANDOM_OBJECT: Random
 }
 

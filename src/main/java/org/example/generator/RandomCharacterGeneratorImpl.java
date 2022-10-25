@@ -7,7 +7,7 @@ public class RandomCharacterGeneratorImpl implements RandomCharacterGenerator {
     private final String LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
     private final String DIGIT_CHARACTERS = "0123456789";
     private final String SPECIAL_CHARACTERS = "~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
-    private final String UNION_OF_ALLOWED_CHARACTERS = UPPERCASE_CHARACTERS
+    private final String ALLOWED_CHARACTERS = UPPERCASE_CHARACTERS
             .concat(LOWERCASE_CHARACTERS)
             .concat(DIGIT_CHARACTERS)
             .concat(SPECIAL_CHARACTERS);
@@ -35,6 +35,6 @@ public class RandomCharacterGeneratorImpl implements RandomCharacterGenerator {
 
     @Override
     public char generateAllowedCharacter() {
-        return UNION_OF_ALLOWED_CHARACTERS.charAt(RANDOM_OBJECT.nextInt(UNION_OF_ALLOWED_CHARACTERS.length()));
+        return ALLOWED_CHARACTERS.charAt(RANDOM_OBJECT.nextInt(ALLOWED_CHARACTERS.length()));
     }
 }
