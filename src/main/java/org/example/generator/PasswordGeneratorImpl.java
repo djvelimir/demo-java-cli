@@ -5,12 +5,13 @@ import org.example.shuffler.StringShuffler;
 import javax.inject.Inject;
 
 public class PasswordGeneratorImpl implements PasswordGenerator {
-    private final int PASSWORD_LENGTH = 16;
+    private final int passwordLength;
     private final RandomCharacterGenerator randomCharacterGenerator;
     private final StringShuffler stringShuffler;
 
     @Inject
     public PasswordGeneratorImpl(RandomCharacterGenerator randomCharacterGenerator, StringShuffler stringShuffler) {
+        this.passwordLength = 16;
         this.randomCharacterGenerator = randomCharacterGenerator;
         this.stringShuffler = stringShuffler;
     }
@@ -34,7 +35,7 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
         stringBuilder.append(randomCharacterGenerator.generateDigitCharacter());
         stringBuilder.append(randomCharacterGenerator.generateSpecialCharacter());
 
-        for (int i = 0; i < PASSWORD_LENGTH - 4; i++) {
+        for (int i = 0; i < passwordLength - 4; i++) {
             stringBuilder.append(randomCharacterGenerator.generateAllowedCharacter());
         }
 

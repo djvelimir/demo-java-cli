@@ -49,7 +49,7 @@ alt#Gold #LightBlue Arguments are valid
     deactivate randomCharacterGenerator
     passwordGenerator -> passwordGenerator: append character
 
-    loop PASSWORD_LENGTH-4 times
+    loop passwordLength - 4 times
         passwordGenerator -> randomCharacterGenerator: generateAllowedCharacter()
         activate randomCharacterGenerator
 

@@ -37,7 +37,7 @@ interface PasswordGenerator {
 }
 
 class PasswordGeneratorImpl {
-    - PASSWORD_LENGTH: int
+    - passwordLength: int
     - randomCharacterGenerator: RandomCharacterGenerator
     - stringShuffler: StringShuffler
 }
@@ -51,12 +51,12 @@ interface RandomCharacterGenerator {
 }
 
 class RandomCharacterGeneratorImpl {
-    - UPPERCASE_CHARACTERS: String
-    - LOWERCASE_CHARACTERS: String
-    - DIGIT_CHARACTERS: String
-    - SPECIAL_CHARACTERS: String
-    - ALLOWED_CHARACTERS: String
-    - RANDOM_OBJECT: Random
+    - uppercaseCharacters: String
+    - lowercaseCharacters: String
+    - digitCharacters: String
+    - specialCharacters: String
+    - allowedCharacters: String
+    - random: Random
 }
 
 interface StringShuffler {
