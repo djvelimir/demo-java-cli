@@ -1,4 +1,4 @@
-@startuml
+@startuml UseCase
 actor "User" as user
 
 rectangle demo-java-cli {

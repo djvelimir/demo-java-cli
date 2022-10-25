@@ -1,4 +1,4 @@
-@startuml
+@startuml Sequence
 participant AppImpl as app
 participant ArgumentProcessorImpl as argumentProcessor
 participant ArgumentValidatorImpl as argumentValidator

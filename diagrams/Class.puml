@@ -1,6 +1,4 @@
-@startuml
-'https://plantuml.com/class-diagram
-
+@startuml Class
 interface App {
     + start(args: String[])
 }
@@ -40,8 +38,8 @@ interface PasswordGenerator {
 
 class PasswordGeneratorImpl {
     - PASSWORD_LENGTH: int
-    - randomCharacterGenerator: RandomCharacterGenerator;
-    - stringShuffler: StringShuffler;
+    - randomCharacterGenerator: RandomCharacterGenerator
+    - stringShuffler: StringShuffler
 }
 
 interface RandomCharacterGenerator {
