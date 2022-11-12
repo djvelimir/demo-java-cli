@@ -12,7 +12,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PasswordGeneratorTest {
+public class PasswordGeneratorImplTest {
     @Mock
     private RandomCharacterGenerator randomCharacterGenerator;
 

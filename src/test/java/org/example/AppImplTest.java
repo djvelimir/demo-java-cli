@@ -1,20 +1,29 @@
 package org.example;
 
-import static org.junit.Assert.assertTrue;
-
+import org.example.processor.ArgumentProcessorImpl;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-/**
- * Unit test for simple App.
- */
-public class AppImplTest
-{
-    /**
-     * Rigorous Test :-)
-     */
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+@RunWith(MockitoJUnitRunner.class)
+public class AppImplTest {
+    @Mock
+    private ArgumentProcessorImpl argumentProcessor;
+
+    @InjectMocks
+    AppImpl app;
+
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void shouldCallProcessMethod() {
+        String[] args = new String[]{};
+
+        app.start(args);
+
+        verify(argumentProcessor, times(1)).process(args);
     }
 }
