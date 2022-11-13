@@ -45,9 +45,9 @@ public class ArgumentProcessorImplTest {
                 "java -jar ./demo-java-cli.jar generate password";
 
         String[] args = new String[]{};
+        when(argumentValidator.validate(args)).thenReturn(false);
 
         argumentProcessor.process(args);
-        when(argumentValidator.validate(args)).thenReturn(false);
 
         verify(terminal, times(1)).show(usage);
     }
