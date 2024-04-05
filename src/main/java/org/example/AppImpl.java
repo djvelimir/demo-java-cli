@@ -1,16 +1,15 @@
 package org.example;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.example.processor.ArgumentProcessor;
-
-import javax.inject.Inject;
 
 /**
  * Main application class
  */
 public class AppImpl implements App {
-    private ArgumentProcessor argumentProcessor;
+    private final ArgumentProcessor argumentProcessor;
 
     public static void main(String[] args) {
         Injector injector = Guice.createInjector(new GuiceModule());

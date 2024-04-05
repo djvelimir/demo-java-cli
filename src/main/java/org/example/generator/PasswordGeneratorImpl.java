@@ -1,8 +1,7 @@
 package org.example.generator;
 
+import com.google.inject.Inject;
 import org.example.shuffler.StringShuffler;
-
-import javax.inject.Inject;
 
 public class PasswordGeneratorImpl implements PasswordGenerator {
     private final int passwordLength;

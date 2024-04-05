@@ -14,7 +14,7 @@ public class RandomCharacterGeneratorImpl implements RandomCharacterGenerator {
         uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz";
         digitCharacters = "0123456789";
-        specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
+        specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?";
         allowedCharacters = uppercaseCharacters
                 .concat(lowercaseCharacters)
                 .concat(digitCharacters)

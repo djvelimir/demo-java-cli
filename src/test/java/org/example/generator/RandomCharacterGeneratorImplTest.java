@@ -12,7 +12,7 @@ public class RandomCharacterGeneratorImplTest {
     private final String uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final String lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz";
     private final String digitCharacters = "0123456789";
-    private final String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
+    private final String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?";
     private final String allowedCharacters = uppercaseCharacters
             .concat(lowercaseCharacters)
             .concat(digitCharacters)

@@ -1,15 +1,15 @@
 package org.example.processor;
 
+import com.google.inject.Inject;
 import org.example.display.Terminal;
 import org.example.generator.PasswordGenerator;
 import org.example.validator.ArgumentValidator;
 
-import javax.inject.Inject;
 
 public class ArgumentProcessorImpl implements ArgumentProcessor {
-    private ArgumentValidator argumentValidator;
-    private PasswordGenerator passwordGenerator;
-    private Terminal terminal;
+    private final ArgumentValidator argumentValidator;
+    private final PasswordGenerator passwordGenerator;
+    private final Terminal terminal;
 
     @Inject
     public ArgumentProcessorImpl(ArgumentValidator argumentValidator, PasswordGenerator passwordGenerator, Terminal terminal) {
