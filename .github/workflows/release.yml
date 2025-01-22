@@ -1,0 +1,27 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Create Release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            We are excited to announce the initial release of java-demo-cli, a command-line application designed to simplify password generation! This tool generates secure, random passwords of 16 characters to enhance your online security. With just a simple command, users can get a strong password that includes a mix of uppercase letters, lowercase letters, numbers, and special characters. Say goodbye to weak passwords and the headache of remembering them—java-demo-cli is here to streamline your password management effortlessly! Download it now and take your first step towards improved security.
+          draft: false
+          prerelease: false
