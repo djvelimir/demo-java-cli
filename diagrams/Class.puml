@@ -1,5 +1,4 @@
 @startuml Class
-!theme amiga
 interface App {
     + start(args: String[])
 }

@@ -1,0 +1,4 @@
+@startuml Class
+!theme amiga
+!include https://raw.githubusercontent.com/djvelimir/demo-java-cli/main/diagrams/Class.puml
+@enduml

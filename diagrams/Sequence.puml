@@ -1,5 +1,4 @@
 @startuml Sequence
-!theme amiga
 participant AppImpl as app
 participant ArgumentProcessorImpl as argumentProcessor
 participant ArgumentValidatorImpl as argumentValidator
@@ -18,7 +17,7 @@ activate argumentValidator
 argumentProcessor <-- argumentValidator: return are arguments valid
 deactivate argumentValidator
 
-alt#Gold Arguments are valid
+alt Arguments are valid
     argumentProcessor -> passwordGenerator: generate()
     activate passwordGenerator
 

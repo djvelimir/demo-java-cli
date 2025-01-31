@@ -1,5 +1,4 @@
 @startuml UseCase
-!theme amiga
 actor "User" as user
 
 rectangle demo-java-cli {

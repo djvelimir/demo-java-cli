@@ -1,0 +1,4 @@
+@startuml Sequence
+!theme amiga
+!include https://raw.githubusercontent.com/djvelimir/demo-java-cli/main/diagrams/Sequence.puml
+@enduml
