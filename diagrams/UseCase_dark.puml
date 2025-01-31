@@ -1,4 +1,4 @@
 @startuml UseCase
-!theme amiga
+!theme crt-green
 !include https://raw.githubusercontent.com/djvelimir/demo-java-cli/main/diagrams/UseCase.puml
 @enduml
