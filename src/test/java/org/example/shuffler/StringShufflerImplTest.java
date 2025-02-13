@@ -1,19 +1,19 @@
 package org.example.shuffler;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class StringShufflerImplTest {
+@ExtendWith(MockitoExtension.class)
+class StringShufflerImplTest {
     @InjectMocks
     private StringShufflerImpl stringShuffler;
 
     @Test
-    public void checkShuffleMethod() {
+    void checkShuffleMethod() {
         String sample = "A8!(,wV5YuI[Vr^>";
         String actual = stringShuffler.shuffle(sample);
 

@@ -3,16 +3,18 @@ package org.example.processor;
 import org.example.display.Terminal;
 import org.example.generator.PasswordGenerator;
 import org.example.validator.ArgumentValidator;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ArgumentProcessorImplTest {
+@ExtendWith(MockitoExtension.class)
+class ArgumentProcessorImplTest {
     @Mock
     private ArgumentValidator argumentValidator;
 
@@ -26,7 +28,7 @@ public class ArgumentProcessorImplTest {
     private ArgumentProcessorImpl argumentProcessor;
 
     @Test
-    public void checkProcessMethodForGeneratePassword() {
+    void checkProcessMethodForGeneratePassword() {
         String[] args = new String[]{"generate", "password"};
         when(argumentValidator.validate(args)).thenReturn(true);
 
@@ -40,7 +42,7 @@ public class ArgumentProcessorImplTest {
     }
 
     @Test
-    public void checkProcessMethodForInvalidArguments() {
+    void checkProcessMethodForInvalidArguments() {
         String usage = "Usage:" + System.lineSeparator() +
                 "java -jar ./demo-java-cli.jar generate password";
 

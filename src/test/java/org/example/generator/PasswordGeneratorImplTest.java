@@ -1,18 +1,18 @@
 package org.example.generator;
 
 import org.example.shuffler.StringShuffler;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
-public class PasswordGeneratorImplTest {
+@ExtendWith(MockitoExtension.class)
+class PasswordGeneratorImplTest {
     @Mock
     private RandomCharacterGenerator randomCharacterGenerator;
 
@@ -23,42 +23,42 @@ public class PasswordGeneratorImplTest {
     private PasswordGeneratorImpl passwordGenerator;
 
     @Test
-    public void shouldCallGenerateUppercaseCharacter() {
+    void shouldCallGenerateUppercaseCharacter() {
         passwordGenerator.generate();
 
         verify(randomCharacterGenerator, times(1)).generateUppercaseCharacter();
     }
 
     @Test
-    public void shouldCallGenerateLowercaseCharacter() {
+    void shouldCallGenerateLowercaseCharacter() {
         passwordGenerator.generate();
 
         verify(randomCharacterGenerator, times(1)).generateLowercaseCharacter();
     }
 
     @Test
-    public void shouldCallGenerateDigitCharacter() {
+    void shouldCallGenerateDigitCharacter() {
         passwordGenerator.generate();
 
         verify(randomCharacterGenerator, times(1)).generateDigitCharacter();
     }
 
     @Test
-    public void shouldCallGenerateSpecialCharacter() {
+    void shouldCallGenerateSpecialCharacter() {
         passwordGenerator.generate();
 
         verify(randomCharacterGenerator, times(1)).generateSpecialCharacter();
     }
 
     @Test
-    public void shouldCallGenerateAllowedCharacter12Times() {
+    void shouldCallGenerateAllowedCharacter12Times() {
         passwordGenerator.generate();
 
         verify(randomCharacterGenerator, times(12)).generateAllowedCharacter();
     }
 
     @Test
-    public void shouldCallShuffle() {
+    void shouldCallShuffle() {
         passwordGenerator.generate();
 
         verify(stringShuffler, times(1)).shuffle(any());
