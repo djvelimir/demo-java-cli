@@ -22,7 +22,7 @@ public class ArgumentProcessorImpl implements ArgumentProcessor {
     public void process(String[] args) {
         if (!argumentValidator.validate(args)) {
             String usage = "Usage:" + System.lineSeparator() +
-                    "java -jar ./demo-java-cli.jar generate password";
+                    "java -jar ./demo-java-cli-[VERSION].jar generate password";
             terminal.show(usage);
             return;
         }

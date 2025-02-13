@@ -44,7 +44,7 @@ class ArgumentProcessorImplTest {
     @Test
     void checkProcessMethodForInvalidArguments() {
         String usage = "Usage:" + System.lineSeparator() +
-                "java -jar ./demo-java-cli.jar generate password";
+                "java -jar ./demo-java-cli-[VERSION].jar generate password";
 
         String[] args = new String[]{};
         when(argumentValidator.validate(args)).thenReturn(false);
