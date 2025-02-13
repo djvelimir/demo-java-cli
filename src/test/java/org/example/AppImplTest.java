@@ -1,17 +1,17 @@
 package org.example;
 
 import org.example.processor.ArgumentProcessorImpl;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AppImplTest {
+@ExtendWith(MockitoExtension.class)
+class AppImplTest {
     @Mock
     private ArgumentProcessorImpl argumentProcessor;
 
@@ -19,7 +19,7 @@ public class AppImplTest {
     AppImpl app;
 
     @Test
-    public void shouldCallProcessMethod() {
+    void shouldCallProcessMethod() {
         String[] args = new String[]{};
 
         app.start(args);

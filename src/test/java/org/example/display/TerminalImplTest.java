@@ -1,23 +1,23 @@
 package org.example.display;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
-public class TerminalImplTest {
+@ExtendWith(MockitoExtension.class)
+class TerminalImplTest {
 
     @InjectMocks
     private TerminalImpl terminal;
 
     @Test
-    public void checkShowMethod() {
+    void checkShowMethod() {
         String message = "Test Message";
         String expected = message + System.lineSeparator();
 
