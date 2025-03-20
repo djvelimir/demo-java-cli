@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class TerminalImplTest {
-
     @InjectMocks
     private TerminalImpl terminal;
 

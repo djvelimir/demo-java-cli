@@ -1,23 +1,25 @@
 package org.example.generator;
 
 import com.google.inject.Inject;
+import org.example.configuration.Configuration;
+import org.example.configuration.Parameter;
 import org.example.shuffler.StringShuffler;
 
 public class PasswordGeneratorImpl implements PasswordGenerator {
-    private final int passwordLength;
+    private final Configuration configuration;
     private final RandomCharacterGenerator randomCharacterGenerator;
     private final StringShuffler stringShuffler;
 
     @Inject
-    public PasswordGeneratorImpl(RandomCharacterGenerator randomCharacterGenerator, StringShuffler stringShuffler) {
-        this.passwordLength = 16;
+    public PasswordGeneratorImpl(RandomCharacterGenerator randomCharacterGenerator, StringShuffler stringShuffler, Configuration configuration) {
+        this.configuration = configuration;
         this.randomCharacterGenerator = randomCharacterGenerator;
         this.stringShuffler = stringShuffler;
     }
 
     /**
      * Generate random password
-     * Generated password length is 16
+     * Generated password length with a default value of 16, you can use a parameter for the desired length
      * Generated password contains at least one uppercase character
      * Generated password contains at least one lowercase character
      * Generated password contains at least one digit character
@@ -27,7 +29,8 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
      */
     @Override
     public String generate() {
-        var stringBuilder = new StringBuilder();
+        int passwordLength = configuration.getValueAsInt(Parameter.PASSWORD_LENGTH_PARAMETER_NAME);
+        StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(randomCharacterGenerator.generateUppercaseCharacter());
         stringBuilder.append(randomCharacterGenerator.generateLowercaseCharacter());
