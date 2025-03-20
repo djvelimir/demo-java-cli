@@ -23,6 +23,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             **Release Notes:**
-            - New Feature: Customizable Password Length in CLI Application. Users can now customize the password length between a minimum of 4 and a maximum of 128 characters, enhancing flexibility and security in password generation. To utilize this feature, simply use the `--password-length` option followed by your preferred number within the specified range. This enhancement aims to improve user experience by catering to various security requirements and preferences.
+            - New Feature: Customizable Password Length in CLI Application. Users can now customize the password length between a minimum of 8 and a maximum of 128 characters, enhancing flexibility and security in password generation. To utilize this feature, simply use the `--password-length` option followed by your preferred number within the specified range. This enhancement aims to improve user experience by catering to various security requirements and preferences.
           draft: false
           prerelease: false
