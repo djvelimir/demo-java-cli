@@ -1,59 +1,73 @@
 @startuml Sequence
 participant AppImpl as app
 participant ArgumentProcessorImpl as argumentProcessor
-participant ArgumentValidatorImpl as argumentValidator
 participant PasswordGeneratorImpl as passwordGenerator
 participant RandomCharacterGeneratorImpl as randomCharacterGenerator
 participant StringShufflerImpl as stringShuffler
 participant TerminalImpl as terminal
+participant ConfigurationImpl as configuration
 
 activate app
 
 app -> argumentProcessor: process(args)
 activate argumentProcessor
 
-argumentProcessor -> argumentValidator: validate(args)
-activate argumentValidator
-argumentProcessor <-- argumentValidator: return are arguments valid
-deactivate argumentValidator
+argumentProcessor -> configuration: load(args)
+activate configuration
+argumentProcessor <-- configuration:
+deactivate configuration
+
+argumentProcessor -> configuration: validate()
+activate configuration
+
+configuration -> configuration: getValueAsInt("password-length")
+configuration -> configuration: validate password length
+
+argumentProcessor <-- configuration: return are arguments valid
+deactivate configuration
 
 alt Arguments are valid
     argumentProcessor -> passwordGenerator: generate()
     activate passwordGenerator
 
+    passwordGenerator -> configuration: getValueAsInt("password-length")
+    activate configuration
+    passwordGenerator <-- configuration: return password length
+    deactivate configuration
+
     passwordGenerator -> randomCharacterGenerator: generateUppercaseCharacter()
     activate randomCharacterGenerator
 
-    randomCharacterGenerator -> passwordGenerator: return uppercase character
+    randomCharacterGenerator --> passwordGenerator: return uppercase character
     deactivate randomCharacterGenerator
     passwordGenerator -> passwordGenerator: append character
 
     passwordGenerator -> randomCharacterGenerator: generateLowercaseCharacter()
     activate randomCharacterGenerator
 
-    randomCharacterGenerator -> passwordGenerator: return lowercase character
+    randomCharacterGenerator --> passwordGenerator: return lowercase character
     deactivate randomCharacterGenerator
     passwordGenerator -> passwordGenerator: append character
 
     passwordGenerator -> randomCharacterGenerator: generateDigitCharacter()
     activate randomCharacterGenerator
 
-    randomCharacterGenerator -> passwordGenerator: return digit character
+    randomCharacterGenerator --> passwordGenerator: return digit character
     deactivate randomCharacterGenerator
     passwordGenerator -> passwordGenerator: append character
 
     passwordGenerator -> randomCharacterGenerator: generateSpecialCharacter()
     activate randomCharacterGenerator
 
-    randomCharacterGenerator -> passwordGenerator: return special character
+    randomCharacterGenerator --> passwordGenerator: return special character
     deactivate randomCharacterGenerator
     passwordGenerator -> passwordGenerator: append character
 
-    loop passwordLength - 4 times
+    loop password length - 4 times
         passwordGenerator -> randomCharacterGenerator: generateAllowedCharacter()
         activate randomCharacterGenerator
 
-        randomCharacterGenerator -> passwordGenerator: return character
+        randomCharacterGenerator --> passwordGenerator: return character
         deactivate randomCharacterGenerator
         passwordGenerator -> passwordGenerator: append character
     end
@@ -61,7 +75,7 @@ alt Arguments are valid
     passwordGenerator -> stringShuffler: shuffle(characters)
     activate stringShuffler
 
-    stringShuffler -> passwordGenerator: return shuffled characters
+    stringShuffler --> passwordGenerator: return shuffled characters
     deactivate stringShuffler
 
     argumentProcessor <-- passwordGenerator: return generated password

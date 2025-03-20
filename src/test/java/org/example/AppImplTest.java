@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.processor.ArgumentProcessorImpl;
+import org.example.processor.ArgumentProcessor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,10 +13,10 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class AppImplTest {
     @Mock
-    private ArgumentProcessorImpl argumentProcessor;
+    private ArgumentProcessor argumentProcessor;
 
     @InjectMocks
-    AppImpl app;
+    private AppImpl app;
 
     @Test
     void shouldCallProcessMethod() {

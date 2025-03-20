@@ -8,11 +8,16 @@ class AppImpl {
     + {static} main(args: String[])
 }
 
-interface ArgumentValidator {
-    + validate(args: String[]): boolean
+interface Configuration {
+    + load(args: String[]): void
+    + getValue(key: String): String
+    + getValueAsInt(key: String): int
+    + validate(): boolean
 }
 
-class ArgumentValidatorImpl {
+class ConfigurationImpl {
+    - appSettings: HashMap<String, String>
+    - getParameterValueFromArguments(args: String[], key: String): String
 }
 
 interface ArgumentProcessor {
@@ -20,7 +25,7 @@ interface ArgumentProcessor {
 }
 
 class ArgumentProcessorImpl {
-    - argumentValidator: ArgumentValidator
+    - configuration: Configuration
     - passwordGenerator: PasswordGenerator
     - terminal: Terminal
 }
@@ -37,7 +42,7 @@ interface PasswordGenerator {
 }
 
 class PasswordGeneratorImpl {
-    - passwordLength: int
+    - configuration: Configuration
     - randomCharacterGenerator: RandomCharacterGenerator
     - stringShuffler: StringShuffler
 }
@@ -66,7 +71,7 @@ interface StringShuffler {
 class StringShufflerImpl {
 }
 
-ArgumentValidator <|-- ArgumentValidatorImpl
+Configuration <|-- ConfigurationImpl
 ArgumentProcessor <|-- ArgumentProcessorImpl
 Terminal <|-- TerminalImpl
 PasswordGenerator <|-- PasswordGeneratorImpl
@@ -76,10 +81,12 @@ App <|-- AppImpl
 
 AppImpl *--l ArgumentProcessor
 
-ArgumentProcessorImpl *--l ArgumentValidator
 ArgumentProcessorImpl *--d PasswordGenerator
 ArgumentProcessorImpl *--r Terminal
 
 PasswordGeneratorImpl *--l RandomCharacterGenerator
 PasswordGeneratorImpl *--r StringShuffler
+
+PasswordGeneratorImpl *--d Configuration
+ArgumentProcessorImpl *--l Configuration
 @enduml

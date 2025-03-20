@@ -23,6 +23,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             **Release Notes:**
-            - Added the Maven Dependency Plugin to automatically create a target/lib folder containing all project dependencies. This enhancement streamlines the packaging process, making it easier to manage and include external libraries required for project execution.
+            - New Feature: Customizable Password Length in CLI Application. Users can now customize the password length between a minimum of 4 and a maximum of 128 characters, enhancing flexibility and security in password generation. To utilize this feature, simply use the `--password-length` option followed by your preferred number within the specified range. This enhancement aims to improve user experience by catering to various security requirements and preferences.
           draft: false
           prerelease: false

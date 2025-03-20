@@ -11,16 +11,16 @@ import org.example.processor.ArgumentProcessor;
 public class AppImpl implements App {
     private final ArgumentProcessor argumentProcessor;
 
-    public static void main(String[] args) {
-        Injector injector = Guice.createInjector(new GuiceModule());
-        App app = injector.getInstance(App.class);
-
-        app.start(args);
-    }
-
     @Inject
     public AppImpl(ArgumentProcessor argumentProcessor) {
         this.argumentProcessor = argumentProcessor;
+    }
+
+    public static void main(String[] args) {
+        Injector injector = Guice.createInjector(new GuiceModule());
+
+        App app = injector.getInstance(App.class);
+        app.start(args);
     }
 
     @Override
