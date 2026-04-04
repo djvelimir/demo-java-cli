@@ -1,6 +1,5 @@
 package org.example.generator;
 
-import com.google.inject.Inject;
 import org.example.configuration.Configuration;
 import org.example.configuration.Parameter;
 import org.example.shuffler.StringShuffler;
@@ -10,7 +9,6 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
     private final RandomCharacterGenerator randomCharacterGenerator;
     private final StringShuffler stringShuffler;
 
-    @Inject
     public PasswordGeneratorImpl(RandomCharacterGenerator randomCharacterGenerator, StringShuffler stringShuffler, Configuration configuration) {
         this.configuration = configuration;
         this.randomCharacterGenerator = randomCharacterGenerator;

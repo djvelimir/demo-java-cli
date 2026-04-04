@@ -1,28 +1,58 @@
+name: Build and Release
+
 on:
   push:
-    # Sequence of patterns matched against refs/tags
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'v*'
 
-name: Create Release
+permissions:
+  contents: write
 
 jobs:
   build:
-    name: Create Release
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Extract version
+        id: version
+        run: |
+          RAW="${GITHUB_REF_NAME}"
+          VERSION="${RAW#v}"
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "RAW_VERSION=$RAW" >> $GITHUB_OUTPUT
+
+      - name: Build JAR
+        run: mvn clean package -Drevision=${{ steps.version.outputs.VERSION }}
+
+      - name: List built files
+        run: ls -lh target/
+
+      - name: Select correct JAR
+        id: jar
+        run: |
+          JAR=$(find target -name "*.jar" ! -name "*original*" | head -n 1)
+          echo "Selected JAR: $JAR"
+          echo "JAR_FILE=$JAR" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        if: ${{ !env.ACT }}
+        run: |
+          gh release create "${{ steps.version.outputs.RAW_VERSION }}" \
+            "${{ steps.jar.outputs.JAR_FILE }}" \
+            --title "Release ${{ steps.version.outputs.RAW_VERSION }}" \
+            --notes "Release ${{ steps.version.outputs.RAW_VERSION }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            **Release Notes:**
-            - New Feature: Customizable Password Length in CLI Application. Users can now customize the password length between a minimum of 8 and a maximum of 128 characters, enhancing flexibility and security in password generation. To utilize this feature, simply use the `--password-length` option followed by your preferred number within the specified range. This enhancement aims to improve user experience by catering to various security requirements and preferences.
-          draft: false
-          prerelease: false

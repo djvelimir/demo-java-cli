@@ -1,6 +1,5 @@
 package org.example.processor;
 
-import com.google.inject.Inject;
 import org.example.configuration.Configuration;
 import org.example.display.Terminal;
 import org.example.generator.PasswordGenerator;
@@ -14,7 +13,6 @@ public class ArgumentProcessorImpl implements ArgumentProcessor {
     private final PasswordGenerator passwordGenerator;
     private final Terminal terminal;
 
-    @Inject
     public ArgumentProcessorImpl(Configuration configuration, PasswordGenerator passwordGenerator, Terminal terminal) {
         this.configuration = configuration;
         this.passwordGenerator = passwordGenerator;
