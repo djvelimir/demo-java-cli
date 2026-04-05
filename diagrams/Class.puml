@@ -61,7 +61,7 @@ class RandomCharacterGeneratorImpl {
     - digitCharacters: String
     - specialCharacters: String
     - allowedCharacters: String
-    - random: Random
+    - random: SecureRandom
 }
 
 interface StringShuffler {

@@ -1,6 +1,6 @@
 package org.example.generator;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class RandomCharacterGeneratorImpl implements RandomCharacterGenerator {
     private final String uppercaseCharacters;
@@ -8,7 +8,7 @@ public class RandomCharacterGeneratorImpl implements RandomCharacterGenerator {
     private final String digitCharacters;
     private final String specialCharacters;
     private final String allowedCharacters;
-    private final Random random = new Random();
+    private final SecureRandom random = new SecureRandom();
 
     public RandomCharacterGeneratorImpl() {
         uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
